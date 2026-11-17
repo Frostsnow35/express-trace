@@ -1,0 +1,36 @@
+/* 全局基础样式（暗色克制风） */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+  background: #f5f6f8;
+  color: #24292f;
+  font-size: 14px;
+}
+a { color: inherit; text-decoration: none; }
+button {
+  cursor: pointer;
+  border: 1px solid #d0d7de;
+  background: #fff;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 13px;
+}
+button:hover { background: #f3f4f6; }
+button.primary { background: #1a7f37; border-color: #1a7f37; color: #fff; }
+button.primary:hover { background: #176f31; }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+input, select, textarea {
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 13px;
+  background: #fff;
+  color: inherit;
+}
+input:focus, select:focus, textarea:focus { outline: 2px solid #4493f8; outline-offset: -1px; }
+table { border-collapse: collapse; width: 100%; background: #fff; }
+th, td { border: 1px solid #d8dee4; padding: 8px 10px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+.card { background: #fff; border: 1px solid #d8dee4; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+.error-text { color: #cf222e; margin-top: 8px; }
+.muted { color: #57606a; }
