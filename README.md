@@ -70,6 +70,8 @@ cd code/frontend && npm install && npm run dev
 | [document/02-数据模型设计.md](document/02-数据模型设计.md) | MongoDB 文档结构、内嵌/袋-件双层建模决策、写传播机制、影响面聚合、索引、容量评估 |
 | [document/03-接口设计.md](document/03-接口设计.md) | REST API 契约、错误码、页面-接口映射 |
 | [document/04-测试与部署.md](document/04-测试与部署.md) | 环境、初始化、测试计划、备份恢复 |
+| [document/06-开发计划.md](document/06-开发计划.md) | 里程碑/issue 映射、时间线、质量门、风险 |
+| [document/07-开发规格.md](document/07-开发规格.md) | 代码/数据/测试验收口径、完成定义（DoD） |
 | [AGENTS.md](AGENTS.md) | 分支/issue/PR/代码规范、AI 辅助声明 |
 
 ## 团队成员
