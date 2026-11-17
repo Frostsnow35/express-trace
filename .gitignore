@@ -33,3 +33,6 @@ __pycache__/
 
 # mongodump 临时文件（backup 目录下的正式备份产物需要提交）
 *.tmp
+
+# vite 依赖预构建缓存
+.vite/
