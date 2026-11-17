@@ -1,11 +1,13 @@
-// 集包袋路由（业务实现见袋接口 issue，此处仅挂载点）
+// 集包袋路由（document/03 §3.7~3.11）
 import { Router } from "express";
+import * as ctrl from "../controllers/bagController.js";
 
 const router = Router();
-// POST /bags                    → 建袋
-// POST /bags/:bagNo/items       → 装件
-// POST /bags/:bagNo/scan        → 袋扫件动
-// POST /bags/:bagNo/exception   → 异常标记
-// GET  /bags/:bagNo/impact      → 影响面分析
+
+router.post("/", ctrl.createBag); // 3.7 建袋
+router.post("/:bagNo/items", ctrl.addItem); // 3.8 装件
+router.post("/:bagNo/scan", ctrl.scanBag); // 3.9 袋扫件动
+router.post("/:bagNo/exception", ctrl.markException); // 3.10 标记异常
+router.get("/:bagNo/impact", ctrl.impact); // 3.11 影响面分析
 
 export default router;
