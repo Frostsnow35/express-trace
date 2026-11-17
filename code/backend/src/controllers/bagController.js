@@ -11,6 +11,22 @@ export async function createBag(req, res, next) {
   }
 }
 
+export async function listBags(req, res, next) {
+  try {
+    ok(res, await bagService.listBags(req.query ?? {}));
+  } catch (e) {
+    next(e);
+  }
+}
+
+export async function getBag(req, res, next) {
+  try {
+    ok(res, await bagService.getBag(req.params.bagNo));
+  } catch (e) {
+    next(e);
+  }
+}
+
 export async function addItem(req, res, next) {
   try {
     const bag = await bagService.addItem(req.params.bagNo, req.body?.order_no);

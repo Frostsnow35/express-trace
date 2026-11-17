@@ -22,6 +22,26 @@ export async function createBag({ dest_node }) {
   });
 }
 
+/** 袋列表（03 §3.12）：可选状态筛选 + 分页，created_at 倒序 */
+export async function listBags({ status, page = 1, pageSize = 10 } = {}) {
+  const filter = {};
+  if (status) filter.status = status;
+  const p = Math.max(1, Number(page) || 1);
+  const ps = Math.min(100, Math.max(1, Number(pageSize) || 10));
+  const [items, total] = await Promise.all([
+    Bag.find(filter).sort({ created_at: -1 }).skip((p - 1) * ps).limit(ps).lean(),
+    Bag.countDocuments(filter)
+  ]);
+  return { items, total, page: p, pageSize: ps };
+}
+
+/** 袋详情（03 §3.13）：含 scans 时间线 */
+export async function getBag(bagNo) {
+  const bag = await Bag.findOne({ bag_no: bagNo }).lean();
+  if (!bag) throw new ApiError(ERROR_CODES.BAG_NOT_FOUND);
+  return bag;
+}
+
 /** 装件（FR-08）：先件后袋两步写入，幂等可重试（document/03 §3.8） */
 export async function addItem(bagNo, order_no) {
   const bag = await Bag.findOne({ bag_no: bagNo });
