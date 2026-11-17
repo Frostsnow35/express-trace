@@ -1,6 +1,6 @@
 // bag-propagation.js — 袋扫件动：写传播 vs 读推导 对比实验（document/04 §4.3）
-// 用法: node code/backend/node_modules/.bin/... —— 无依赖，直接用 mongosh 不便，故用 node + mongodb driver
-// 运行: cd code/backend && npm i mongodb --no-save && node ../../data/benchmark/bag-propagation.js
+// 运行: cd data/benchmark && npm i mongodb --no-save && node bag-propagation.js
+//（ESM 按脚本所在目录解析依赖，必须在本目录安装 mongodb 后执行）
 // 口径: 单变量（只变机制）、每轮 ≥5 次取均值、原始数据输出到 stdout（归档进验收报告）
 
 import { MongoClient } from "mongodb";
