@@ -36,6 +36,3 @@ __pycache__/
 
 # vite 依赖预构建缓存
 .vite/
-
-# 个人材料（仅本地保留，禁止提交）
-/algozzi-no-push/
