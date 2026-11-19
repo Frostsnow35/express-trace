@@ -6,7 +6,9 @@
   "description": "驿迹 ExpressTrace 后端 — Express + Mongoose",
   "scripts": {
     "dev": "node --watch src/app.js",
-    "start": "node src/app.js"
+    "start": "node src/app.js",
+    "test": "node test/stats-track.test.js && node test/integration-target.test.js",
+    "test:integration": "node test/run-integration.js"
   },
   "engines": {
     "node": ">=18"

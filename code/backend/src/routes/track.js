@@ -1,7 +1,8 @@
-// 公开查单路由（业务实现见 issue #7，此处仅挂载点）
+// 公开查单路由（FR-06）
 import { Router } from "express";
+import * as ctrl from "../controllers/trackController.js";
 
 const router = Router();
-// GET /track/:orderNo → issue #7
+router.get("/:orderNo", ctrl.getTrack);
 
 export default router;
