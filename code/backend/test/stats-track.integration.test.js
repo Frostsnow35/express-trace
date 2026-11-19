@@ -1,6 +1,7 @@
 // 仅连接经 Docker 身份核验的空临时实例；正常入口为 npm run test:integration
 import assert from "node:assert/strict";
 import { once } from "node:events";
+import { createServer } from "node:net";
 import { setTimeout as delay } from "node:timers/promises";
 import { test } from "node:test";
 import mongoose from "mongoose";
@@ -14,6 +15,16 @@ const labels = ["已创建", "已揽收", "中转运输", "派送中", "已签�
 const party = { name: "测试姓名", phone: "13800000000", address: "测试省测试市测试路1号" };
 const body = { sender: party, receiver: party, package: { weight_kg: 1, quantity: 1, category: "文件" } };
 
+// 后端端口取本机空闲端口，避免与已有服务冲突（INTEGRATION_PORT 可覆盖）
+async function reserveFreePort() {
+  const server = createServer();
+  server.listen(0, "127.0.0.1");
+  await once(server, "listening");
+  const { port } = server.address();
+  await new Promise((resolve) => server.close(resolve));
+  return String(port);
+}
+
 test("统计与公开查单真实数据库及 HTTP 验收", { skip: !uri, timeout: 60000 }, async (t) => {
   verifyIntegrationTarget(uri, process.env.INTEGRATION_CONTAINER_ID);
   let child;
@@ -22,7 +33,7 @@ test("统计与公开查单真实数据库及 HTTP 验收", { skip: !uri, timeou
     assert.equal((await mongoose.connection.db.listCollections().toArray()).length, 0,
       "必须使用全新空库，防止写入已有业务数据；请使用独立临时容器");
 
-    const port = process.env.INTEGRATION_PORT ?? "3107";
+    const port = process.env.INTEGRATION_PORT ?? (await reserveFreePort());
     child = startTestBackend(uri, port);
     let logs = "";
     child.stdout.on("data", (data) => { logs += data; });
